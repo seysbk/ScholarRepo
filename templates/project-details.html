@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'project-details.css' %}">
+    <title>ScholarRepo | Project Details</title>
+</head>
+<body>
+    <header>
+        <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
+        <nav>
+            <ul>
+                <a href="{% url 'home' %}" class="home"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
+                <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
+                <a href="{% url 'upload' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
+                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <details>
+                    <summary>
+                        <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
+                    </summary>
+                    <div class="account">
+                        <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
+                        <a href="#"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
+                    </div>
+                </details>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+
+        <section class="intro">
+            <div class="info">
+                <span>Uploaded {{project.created_at | timesince}} ago</span>
+                <h1>{{project.title}}</h1>
+                <h2>{{project.category}}</h2>
+                <h3><img src="{% static 'user.png' %}" alt="user-profile" width="30" height="30">{{project.uploaded_by}}</h3>
+                <div class="links">
+                    <a href="{{project.github_link}}" target="_blank"><img src="{% static 'github.png' %}" alt="github" width="30" height="30">GitHub</a>
+                    <a href="{{project.live_link}}" target="_blank"><img src="{% static 'link.png' %}" alt="link" width="30" height="30">Live Link</a>
+                </div>
+            </div>
+
+            <div class="image">
+                <img src="{{project.cover_image.url}}" alt="Project Cover Image">
+            </div>
+        </section>
+
+        <section class="video-description">
+            <video height="600" width="100%" controls>
+                <source src="{{project.demo_video}}" type="video/mp4">
+            </video>
+            <div class="description">
+                <h4>Project Description</h4>
+                <p>{{project.description}}</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="scholarRepo footer">
+            <img src="{% static 'logo.png' %}" alt="logo" class="nav-img" width="120" height="120">
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Socials</h5>
+                <a href="https://www.x.com/">X</a>
+                <a href="https://www.instagram.com/">Instagram</a>
+                <a href="https://www.facebook.com/">Facebook</a>
+                <a href="https://www.linkedin.com/">LinkedIn</a>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Explore</h5>
+                <a href="#">Alerts</a>
+                <a href="#">My Account</a>
+                <a href="#">Find Repo</a>
+                <a href="{% url 'upload' %}">Upload Project</a>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Developers</h5>
+                <a href="https://sbk-socials.vercel.app/"><em>SBKmadeIT</em></a>
+                <a href="https://www.facebook.com/">Facebook</a>
+                <a href="https://www.snapchat.com/">Snapchat</a>
+                <a href="https://www.instagram.com/">Instagram</a>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Legal</h5>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Cookies</a>
+                <a href="">Licenses</a>
+            </ul>
+        </div>
+    </footer>
+    <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+</body>
+</html>

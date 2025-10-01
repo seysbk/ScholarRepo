@@ -1,0 +1,121 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <title>ScholarRepo | Upload</title>
+    <link rel="stylesheet" href="{% static 'upload.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
+        <nav>
+            <ul>
+                <a href="{% url 'home' %}" class="nav-img"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px">Home</a>
+                <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
+                <a href="{% url 'upload' %}" class="upload"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px">Upload</a>
+                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <details>
+                    <summary>
+                        <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
+                    </summary>
+                    <div class="account">
+                        <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
+                        <a href="#"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
+                    </div>
+                </details>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages%}
+            <li class="{{message.tags}}">{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Upload New Project</h2>
+
+            <label for="id_category">Project Category</label>
+            {{form.category}}
+
+            <label for="id_title">Project Name</label>
+            {{form.title}}
+
+            <label for="id_description">Description</label>
+            {{form.description}}
+
+            <div class="link">
+                <div class="link-content">
+                    <label for="id_live_link">Live Link</label>
+                    {{form.live_link}}
+                </div>
+                <div class="link-content">
+                    <label for="id_github_link">GitHub Link</label>
+                    {{form.github_link}}
+                </div>            
+            </div>
+
+            <div class="file">
+                <div class="file-content">
+                    <label for="id_cover_image"><img src="{% static 'cloud.png' %}" alt="cloud" width="30" height="30">Cover Image</label>
+                    {{form.cover_image}}
+                </div>
+    
+                <div class="file-content">
+                    <label for="id_demo_video"><img src="{% static 'cloud.png' %}" alt="cloud" width="30" height="30">Demo Video</label>
+                    {{form.demo_video}}
+                </div>
+            </div>
+
+            <button type="submit" class="submit">Submit</submit>
+
+        </form>
+    </main>
+
+    <footer>
+        <div class="scholarRepo footer">
+            <img src="{% static 'logo.png' %}" alt="logo" class="nav-img" width="120" height="120">
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Socials</h5>
+                <a href="https://www.x.com/">X</a>
+                <a href="https://www.instagram.com/">Instagram</a>
+                <a href="https://www.facebook.com/">Facebook</a>
+                <a href="https://www.linkedin.com/">LinkedIn</a>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Explore</h5>
+                <a href="#">Alerts</a>
+                <a href="#">My Account</a>
+                <a href="#">Find Repo</a>
+                <a href="{% url 'upload' %}">Upload Project</a>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Developers</h5>
+                <a href="https://sbk-socials.vercel.app/"><em>SBKmadeIT</em></a>
+                <a href="https://www.facebook.com/">Facebook</a>
+                <a href="https://www.snapchat.com/">Snapchat</a>
+                <a href="https://www.instagram.com/">Instagram</a>
+            </ul>
+        </div>
+    </footer>
+
+   <p class="right"> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p> 
+</body>
+</html>

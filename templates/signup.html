@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <title>ScholarRepo | Signup</title>
+    <link rel="stylesheet" href="{% static 'signup.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
+        <nav>
+            <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="30px" height="30px">Sign In</a>
+        </nav>
+    </header>
+
+    <main>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages%}
+            <li class="{{message.tags}}">{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <fieldset>
+            <legend>Sign Up</legend>
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <label for="id_first_name">First Name(s)</label>
+                {{form.first_name}}
+
+                <label for="id_last_name">Last Name</label>
+                {{form.last_name}}
+
+                <label for="id_email">Email</label>
+                {{form.email}}
+
+                <label for="id_username">Username</label>
+                {{form.username}}
+
+                <label for="id_password1">Create Password</label>
+                {{form.password1}}
+
+                <label for="id_password2">Confirm Password</label>
+                {{form.password2}}
+
+                <label for="check" class="check"><input type="checkbox" required name="check">I agree to <a href="#"> Terms </a> of service</label>
+
+                <input type="submit" class="submit">
+            </form>
+        </fieldset>
+    <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+    </main>
+</body>
+</html>

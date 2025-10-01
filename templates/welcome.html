@@ -1,0 +1,143 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'welcome.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <title>ScholarRepo | welcome</title>
+</head>
+<body>
+    <header>
+        <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
+        <nav>
+            <ul>
+                <a href="#" ><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
+                <a href="#"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
+                <a href="#"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
+                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <details>
+                    <summary>
+                        <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
+                    </summary>
+                    <div class="account">
+                        <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
+                        <a href="#"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
+                    </div>
+                </details>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="welcome-screen">
+            <div class="greetings">
+                <h1>
+                    OBAAKE <br>
+                    WOEZOR <br>
+                    AKWAABA <br>
+                    WELCOME
+                </h1>
+            </div>
+            <div class="sub">
+                <h1>
+                    DISCOVER <br>
+                    SHARE & <br>
+                    CELEBRATE <br>
+                    PROJECTS
+                </h1>
+            </div>
+            <div class="visuals">
+                <video width="600" height="100%" muted autoplay loop>
+                    <source src="{% static 'video.mp4' %}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="buttons">
+                <a href="{% url 'signin' %}" class="signin"><img src="{% static 'signin.png' %}" alt="signin" width="25" height="25">Sign In</a>
+                <span><em>Don't have an account?</em></span>
+                <a href="{% url 'signup' %}" class="signup"><img src="{% static 'signin.png' %}" alt="signup" width="25" height="25">Sign Up</a>
+            </div>
+        </div>
+
+        <div class="search">
+            <label for="search">Search for Project</label>
+            <br>
+            <input type="search" placeholder="🔍 Search" id="search">
+        </div>
+
+    <section>
+        <div class="new">
+            <h2>
+                What's New :
+            </h2>
+        </div>
+        {% for projects in project_details %}
+        <article>
+            <figure>
+                <img src="{{ projects.cover_image.url }}" alt="Project cover">
+            </figure>
+            <figcaption>
+                <div class="description">
+                    <h3>{{projects.category}}</h3>
+                    <h4>{{projects.title}}</h4>
+                </div>
+                <div class="user-project">
+                    <img src="{% static 'user.png'%}" alt="user" width="30px" height="30px">
+                    <h6>{{projects.uploaded_by}}</h6>
+                </div>
+            </figcaption>
+        </article>
+        {% endfor %}
+    </section>
+    </main>
+
+    <footer>
+        <div class="scholarRepo footer">
+            <img src="{% static 'logo.png' %}" alt="logo" class="logo" width="120" height="120">
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Socials</h5>
+                <a href="https://www.x.com/">X</a>
+                <a href="https://www.instagram.com/">Instagram</a>
+                <a href="https://www.facebook.com/">Facebook</a>
+                <a href="https://www.linkedin.com/">LinkedIn</a>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Explore</h5>
+                <a href="#">Alerts</a>
+                <a href="#">My Account</a>
+                <a href="#">Find Repo</a>
+                <a href="{% url 'upload' %}">Upload Project</a>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Developers</h5>
+                <a href="https://sbk-socials.vercel.app/"><em>SBKmadeIT</em></a>
+                <a href="https://www.facebook.com/">Facebook</a>
+                <a href="https://www.snapchat.com/">Snapchat</a>
+                <a href="https://www.instagram.com/">Instagram</a>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <h5>Legal</h5>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Cookies</a>
+                <a href="">Licenses</a>
+            </ul>
+        </div>
+    </footer>
+    <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+</body>
+</html>

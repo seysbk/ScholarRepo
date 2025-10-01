@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <title>ScholarRepo | Signin</title>
+    <link rel="stylesheet" href="{% static 'signin.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
+        <nav>
+            <a href="{% url 'signup' %}"><img src="{% static 'signin.png' %}" alt="signin" width="30px" height="30px">Sign Up</a>
+        </nav>
+    </header>
+
+    <main>
+        <fieldset>
+            <legend>Sign In</legend>
+            <form action="" method="post">
+                {% csrf_token %}
+
+                <label for="username">Username</label>
+                <input type="text" required placeholder="username or email" name="username">
+
+                <label for="password">Password</label>
+                <input type="password" required name="password">
+
+
+                <button type="submit" class="button">Sign In</button>
+
+                {% if messages %}
+                    <ul class="messages">
+                {% for message in messages%}
+                    <li class="{{message.tags}}">{{message}}</li>
+                {% endfor %}
+                    </ul>
+                {% endif %}
+                
+                <div class="links">
+                    <a href="#">forgot password</a>
+                    <a href="{% url 'signup' %}" style="position: absolute; right: 0;">Sign Up</a>
+                </div>
+
+            </form>
+        </fieldset>
+    <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+    </main>
+    
+</body>
+</html>

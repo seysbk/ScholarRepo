@@ -1,0 +1,10 @@
+todo.txt
+media/
+static/
+*log
+_pycache_/
+*.py[cod]
+environment/
+db.sqlite3
+.vscode
+qrcode.py
