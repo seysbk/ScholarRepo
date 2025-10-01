@@ -45,7 +45,7 @@ Some Directories were not pushed due to security reasons.
 
 🙋‍♀️ Author
 
-- *[Seyram Borloe Kuvuordo](https://github.com/yourusername)*
+- *[Seyram Borloe Kuvuordo](https://github.com/seysbk)*
 - GitHub: [@seysbk](https://github.com/seysbk)
 - Instagram: [@sey.sbk](https://instagram.com/sey.sbk)
 - LinkedIn: [Seyram Borloe Kuvuordo](https://linkedin.com/in/seyram-borloe-kuvuordo)
