@@ -9,4 +9,5 @@ urlpatterns = [
     path('upload/', views.upload, name='upload'),
     path('find/', views.find, name='find'),
     path('project/<int:id>/', views.project_details, name = 'project-details'),
+    path('settings/', views.settings_general, name = 'settings'),
 ]

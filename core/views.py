@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import Project, Category
-from .forms import UploadProjectForm, SignupForm
+from .forms import UploadProjectForm, SignupForm,UserInfo
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 @login_required
 def home(request):
@@ -53,7 +54,12 @@ def upload(request):
 
 @login_required
 def find(request):
-    return render(request, 'find.html')
+    if request.method == "POST":
+        search = request.POST['search'] #name of the input field / what was typed
+        projects = Project.objects.filter( Q(title__contains=search) | Q(category__name__contains=search) | Q(uploaded_by__username__contains=search))
+        return render(request, 'find.html', {'search':search, 'projects':projects},)
+    else:
+        return render(request, 'find.html')
 
 def welcome(request):
     project_details = Project.objects.all()
@@ -62,3 +68,26 @@ def welcome(request):
 def project_details(request, id):
     project = get_object_or_404(Project, pk=id)
     return render(request, 'project-details.html', {'project' : project})
+
+
+@login_required
+def settings_general(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserInfo(request.POST,request.FILES, instance=user)
+        # form.fields['password1'].required = False
+        # form.fields['password2'].required = False
+        if form.is_valid():
+            user = form.save(commit=False)
+            User.username = request.user.username
+            form.save()
+            messages.success(request, 'Profile Updated!!')
+            return redirect ('/settings/')
+        else:
+            messages.error(request, 'An Error Occured. Try Again!!')
+            print(form.errors)
+    else:
+        form = UserInfo(instance=user)
+        # form.fields['password1'].required = False
+        # form.fields['password2'].required = False
+    return render(request, 'settings.html', { 'form': form,'user':user},)

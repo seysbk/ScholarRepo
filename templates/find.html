@@ -25,7 +25,7 @@
                     </summary>
                     <div class="account">
                         <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
-                        <a href="#"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'settings'%}"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
                         <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
                     </div>
                 </details>
@@ -35,18 +35,25 @@
     <main>
         <section>
             <div class="search">
-                <label for="search">Search for Repo</label>
-                <br>
-                <input type="search" placeholder="🔍 Search" id="search">
-            </div>
+            <form action="{% url 'find' %}" method="POST">
+                {% csrf_token %}
+
+                {% if search %}
+                    <label for="search"><h1>{{search | capfirst}}</h1></label>
+                {% else %}
+                    <label for="search"><h1>Search for Project</h1></label>
+                {% endif %}
+                <input type="search" placeholder="🔍 Search" id="search" name="search">
+                <button type="submit">search</button>
+            </form>
             <div class="sort-filter">
-                <select name="sort" id="sort">
+                <!-- <select name="sort" id="sort">
                     <option value="" selected><img src="{% static 'sort.png' %}" alt="sort" width="25" height="25">Sort</option>
                     <option value="A to Z">A to Z</option>
                     <option value="Z to A">Z to A</option>
                     <option value="Z to A">Recent</option>
                     <option value="Z to A">Oldest</option>
-                </select>
+                </select> -->
 
                 <select name="filter" id="filter">
                     <option value="" selected><img src="{% static 'filter.png' %}" alt="filter" width="25" height="25">Filter</option>
@@ -56,9 +63,30 @@
                     <option value="Z to A">Owner</option>
                 </select>
             </div>
+        </div>
         </section>
-        <section>
-            <img src="{% static 'search.svg' %}" alt="search-illustration" class="illustration">
+        <section class="result">
+            {% if search %}
+            {% for project in projects %}
+                <a href="{% url 'project-details' project.id %}">
+                    <article>
+                        <figure>
+                            <img src="{{ project.cover_image.url }}" alt="Project cover">
+                        </figure>
+                        <figcaption>
+                            <div class="description">
+                                <h3>{{project.category}}</h3>
+                                <h4>{{project.title}}</h4>
+                            </div>
+                            <div class="user-project">
+                                <img src="{% static 'user.png'%}" alt="user" width="30px" height="30px">
+                                <h6>{{project.uploaded_by}}</h6>
+                            </div>
+                        </figcaption>
+                    </article>
+                </a>
+            {% endfor %}
+            {% endif %}
         </section>
     </main>
 

@@ -25,7 +25,7 @@
                     </summary>
                     <div class="account">
                         <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
-                        <a href="#"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'settings' %}"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
                         <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
                     </div>
                 </details>
@@ -54,7 +54,7 @@
 
         <section class="video-description">
             <video height="600" width="100%" controls>
-                <source src="{{project.demo_video}}" type="video/mp4">
+                <source src="{{project.demo_video.url}}" type="video/mp4">
             </video>
             <div class="description">
                 <h4>Project Description</h4>

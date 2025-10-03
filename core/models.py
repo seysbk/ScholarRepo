@@ -13,6 +13,12 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     role= models.ForeignKey(Role, on_delete=models.CASCADE, null=True, blank= True)
     created_at = models.DateTimeField(auto_now_add=True)
+    github = models.TextField(null=True, blank=True)
+    linkedin = models.TextField(null=True, blank=True)
+    instagram = models.TextField(null=True, blank=True)
+    link = models.TextField(null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pic/', null=True, blank=True)
     
     def __str__(self):
         return self.username
@@ -28,7 +34,7 @@ class Project(models.Model):
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     cover_image = models.ImageField(upload_to='project_images/')
-    demo_video = models.FileField( blank=True)
+    demo_video = models.FileField( blank=True, null=True)
     github_link = models.URLField()
     live_link = models.URLField()
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)

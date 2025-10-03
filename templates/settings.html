@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'settings.css' %}">
+    <title>ScholarRepo | Settings</title>
+</head>
+<body>
+    <header>
+        <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
+        <nav>
+            <ul>
+                <a href="{% url 'home' %}" class="home"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
+                <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
+                <a href="{% url 'upload' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
+                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <details>
+                    <summary>
+                        <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
+                    </summary>
+                    <div class="account">
+                        <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
+                        <a href="{% url 'settings'%}"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
+                    </div>
+                </details>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <div class="tabs">
+                <h1>Settings</h1>
+                <h2 class="active">General</h2>
+                <h2>Account</h2>
+                <h2>Privacy & Security</h2>
+                <h2>Project Settings</h2>
+            </div>
+            <div class="account-user">
+                <img src="{{user.profile_pic.url}}" alt="user" width="30" height="30">
+                <h3>{{user.username}}</h3>
+            </div>
+        </aside>
+        <section>
+            <div class="settings-header">
+                <h2>General</h2>
+            </div>
+            <form class="user-info" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="name">
+                    <label for="id_profile_pic"><img src="{{user.profile_pic.url}}" alt="profile pic" width="128" height="128">{{form.profile_pic}}</label>
+                    <h3>{{form.first_name}} {{form.last_name}}</h3>
+                    <!-- <h4>{{form.username}}</h4> -->
+                    <div class="socials">
+                        <details>
+                            <summary>
+                                <img src="{% static 'mail.png' %}" alt="mail" width="30" height="30">
+                            </summary>
+                            {{form.email}}
+                        </details>
+                        <details>
+                            <summary>
+                                <img src="{% static 'github.png' %}" alt="github" width="30" height="30">
+                            </summary>
+                            {{form.github}}
+                        </details>
+                        <details>
+                            <summary>
+                                <img src="{% static 'linkedin.png' %}" alt="linkedin" width="30" height="30">
+                            </summary>
+                            {{form.linkedin}}
+                        </details>
+                        <details>
+                            <summary>
+                                <img src="{% static 'instagram.png' %}" alt="insta" width="30" height="30">
+                            </summary>
+                            {{form.instagram}}
+                        </details>
+                        <details>
+                            <summary>
+                                <img src="{% static 'link.png' %}" alt="web" width="30" height="30">
+                            </summary>
+                            {{form.link}}
+                        </details>
+                    </div>
+                </div>
+                <div class="bio">
+                    <h3>Bio</h3>
+                    {{form.bio}}
+                    <button type="submit">Update</button>
+                </div>
+            </form>
+            <div class="theme">
+                <h3>Theme</h3>
+                <span class="dark">dark</span>
+                <span class="light">light</span>
+                <span class="system">system</span>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

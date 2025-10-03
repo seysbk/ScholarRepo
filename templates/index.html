@@ -25,7 +25,7 @@
                     </summary>
                     <div class="account">
                         <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
-                        <a href="#"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'settings'%}"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
                         <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
                     </div>
                 </details>
@@ -35,9 +35,13 @@
 
     <main>
         <div class="search">
-            <label for="search">Search for Project</label>
-            <br>
-            <input type="search" placeholder="🔍 Search" id="search">
+            <form action="{% url 'find' %}" method="POST">
+                {% csrf_token %}
+                <label for="search">Search for Project</label>
+                <br>
+                <input type="search" placeholder="🔍 Search" id="search" name="search">
+                <button type="submit">search</button>
+            </form>
         </div>
 
     <section>
