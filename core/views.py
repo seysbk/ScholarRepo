@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from .models import Project, Category
 from .forms import UploadProjectForm, SignupForm,UserInfo
 from django.contrib.auth.models import User
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 @login_required
 def home(request):
-    project_details = Project.objects.all()
+    project_details = Project.objects.all().order_by('-created_at')
     return render(request, 'index.html', {'project_details' : project_details})
 
 def signup(request):
@@ -62,7 +62,7 @@ def find(request):
         return render(request, 'find.html')
 
 def welcome(request):
-    project_details = Project.objects.all()
+    project_details = Project.objects.all().order_by('-created_at')
     return render(request, 'welcome.html', {'project_details' : project_details})
 
 def project_details(request, id):
@@ -75,8 +75,6 @@ def settings_general(request):
     user = request.user
     if request.method == 'POST':
         form = UserInfo(request.POST,request.FILES, instance=user)
-        # form.fields['password1'].required = False
-        # form.fields['password2'].required = False
         if form.is_valid():
             user = form.save(commit=False)
             User.username = request.user.username
@@ -88,6 +86,40 @@ def settings_general(request):
             print(form.errors)
     else:
         form = UserInfo(instance=user)
-        # form.fields['password1'].required = False
-        # form.fields['password2'].required = False
     return render(request, 'settings.html', { 'form': form,'user':user},)
+
+@login_required
+def profile(request,id):
+    project = get_object_or_404(Project, pk=id)
+    user = project.uploaded_by
+    projects = Project.objects.filter(uploaded_by=user)
+    return render(request, 'profile.html', {'user':user, 'projects':projects},)
+
+@login_required
+def like_project(request, id):
+    project = get_object_or_404(Project, pk=id)
+    if project.likes.filter(id=request.user.id):
+        project.likes.remove(request.user)
+    else:
+        project.likes.add(request.user)
+    return redirect(request.META.get('HTTP_REFERER','/'))
+
+def signout(request):
+    logout(request)
+    return redirect ('welcome')
+
+def project_settings(request):
+    user = request.user
+    projects = Project.objects.filter(uploaded_by=user)
+    return render(request, 'project-settings.html', {'user':user, 'projects':projects},)
+
+def delete_project(request, id):
+    project = Project.objects.get(pk=id)
+    project.delete()
+    messages.success(request, 'Project Deleted!!')
+    return redirect(request.META.get('HTTP_REFERER','/'))
+
+def my_profile(request):
+    user = request.user
+    projects = Project.objects.filter(uploaded_by=user)
+    return render(request, 'profile.html', {'user':user, 'projects':projects},)

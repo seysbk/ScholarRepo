@@ -18,7 +18,7 @@ class User(AbstractUser):
     instagram = models.TextField(null=True, blank=True)
     link = models.TextField(null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pic/', null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pic/', null=True, blank=True, default='profile_pic/logo.png')
     
     def __str__(self):
         return self.username
@@ -34,13 +34,17 @@ class Project(models.Model):
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     cover_image = models.ImageField(upload_to='project_images/')
-    demo_video = models.FileField( blank=True, null=True)
+    demo_video = models.FileField( blank=True, null=True, upload_to='demo_videos/', default='demo_videos/default.mp4')
     github_link = models.URLField()
     live_link = models.URLField()
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     assigned_lecturer = models.CharField( max_length=100, blank=True)
     likes = models.ManyToManyField(User, related_name="likes", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    #likes counter
+    def number_of_likes(self):
+        return self.likes.count()
     
     def __str__(self):
         return self.title

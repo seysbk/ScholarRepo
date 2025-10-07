@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
-    <link rel="stylesheet" href="{% static 'find.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <title>ScholarRepo | Find</title>
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <title>ScholarRepo | {{user.username | capfirst}}'s Profile</title>
 </head>
 <body>
     <header>
@@ -16,7 +16,7 @@
         <nav>
             <ul>
                 <a href="{% url 'home' %}"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
-                <a href="{% url 'find' %}" class="find"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px">Find</a>
+                <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
                 <a href="{% url 'upload' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
                 <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
                 <details>
@@ -32,64 +32,49 @@
             </ul>
         </nav>
     </header>
+    
     <main>
-        <section>
-            <div class="search">
-            <form action="{% url 'find' %}" method="POST">
-                {% csrf_token %}
-
-                {% if search %}
-                    <label for="search"><h1>{{search | capfirst}}</h1></label>
-                {% else %}
-                    <label for="search"><h1>Search for Project</h1></label>
-                {% endif %}
-                <input type="search" placeholder="🔍 Search" id="search" name="search">
-                <button type="submit">search</button>
-            </form>
-            <div class="sort-filter">
-                <!-- <select name="sort" id="sort">
-                    <option value="" selected><img src="{% static 'sort.png' %}" alt="sort" width="25" height="25">Sort</option>
-                    <option value="A to Z">A to Z</option>
-                    <option value="Z to A">Z to A</option>
-                    <option value="Z to A">Recent</option>
-                    <option value="Z to A">Oldest</option>
-                </select> -->
-
-                <select name="filter" id="filter">
-                    <option value="" selected><img src="{% static 'filter.png' %}" alt="filter" width="25" height="25">Filter</option>
-                    <option value="A to Z">Category</option>
-                    <option value="Z to A">Title</option>
-                    <option value="Z to A">Lecturer</option>
-                    <option value="Z to A">Owner</option>
-                </select>
-            </div>
+    <aside>
+        <img src="{{user.profile_pic.url}}" alt="User Profile Picture" width="120" height="120" style="border-radius: 50%;">
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <h3>@{{user.username}}</h3>
+        <div class="socials">
+            <a href="mailto:{{user.email}}"><img src="{% static 'mail.png' %}" alt="email" width="30" height="30"></a>
+            <a href="{{user.github}}" target="_blank"><img src="{% static 'github.png' %}" alt="github" width="30" height="30"></a>
+            <a href="{{user.linkedin}}" target="_blank"><img src="{% static 'linkedin.png' %}" alt="linkedin" width="30" height="30"></a>
+            <a href="{{user.instagram}}" target="_blank"><img src="{% static 'instagram.png' %}" alt="instagram" width="30" height="30"></a>
+            <a href="{{user.link}}" target="_blank"><img src="{% static 'link.png' %}" alt="link" width="30" height="30"></a>
         </div>
-        </section>
-        <section class="result">
-            {% if search %}
+        <h4>Bio</h4>
+        <p class="bio">
+            {{user.bio}}
+        </p>
+    </aside>
+        <section class="project">
+            <div class="profile-header">
+                <h1>{{user.username | capfirst}}'s Profile</h1>
+            </div>
             {% for project in projects %}
-                <a href="{% url 'project-details' project.id %}">
-                    <article>
-                        <figure>
-                            <img src="{{ project.cover_image.url }}" alt="Project cover">
-                        </figure>
-                        <figcaption>
-                            <div class="description">
-                                <h3>{{project.category}}</h3>
-                                <h4>{{project.title}}</h4>
-                            </div>
-                            <div class="user-project">
-                                <img src="{% static 'user.png'%}" alt="user" width="30px" height="30px">
-                                <h6>{{project.uploaded_by}}</h6>
-                            </div>
-                        </figcaption>
-                    </article>
-                </a>
+            <a href="{% url 'project-details' project.id %}">
+                <article>
+                    <figure>
+                        <img src="{{ project.cover_image.url }}" alt="Project cover">
+                    </figure>
+                    <figcaption>
+                        <div class="description">
+                            <h3>{{project.category}}</h3>
+                            <h4>{{project.title}}</h4>
+                        </div>
+                        <div class="user-project">
+                            <img src="{% static 'user.png'%}" alt="user" width="30px" height="30px">
+                            <h6>{{project.uploaded_by}}</h6>
+                        </div>
+                    </figcaption>
+                </article>
+            </a>
             {% endfor %}
-            {% endif %}
         </section>
     </main>
-
     <footer>
         <div class="scholarRepo footer">
             <img src="{% static 'logo.png' %}" alt="logo" class="nav-img" width="120" height="120">
@@ -121,7 +106,16 @@
                 <a href="https://www.instagram.com/">Instagram</a>
             </ul>
         </div>
+        <div class="footer">
+            <ul>
+                <h5>Legal</h5>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Cookies</a>
+                <a href="">Licenses</a>
+            </ul>
+        </div>
     </footer>
-    <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+    <p class="rights"> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
 </body>
 </html>

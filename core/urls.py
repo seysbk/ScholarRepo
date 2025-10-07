@@ -9,5 +9,11 @@ urlpatterns = [
     path('upload/', views.upload, name='upload'),
     path('find/', views.find, name='find'),
     path('project/<int:id>/', views.project_details, name = 'project-details'),
-    path('settings/', views.settings_general, name = 'settings'),
+    path('settings/general', views.settings_general, name = 'settings'),
+    path('profile/<int:id>/', views.profile, name = 'profile'),
+    path('like_project/<int:id>/', views.like_project, name = 'like'),
+    path('signout/', views.signout, name='signout'),
+    path('settings/projects/', views.project_settings, name = 'project-settings'),
+    path('delete-project/<int:id>/', views.delete_project, name='delete-project'),
+    path('profile/', views.my_profile, name='profile')
 ]

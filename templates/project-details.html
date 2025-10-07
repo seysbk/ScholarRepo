@@ -24,9 +24,9 @@
                         <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
                     </summary>
                     <div class="account">
-                        <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
+                        <a href="{% url 'profile' %}"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
                         <a href="{% url 'settings' %}"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
-                        <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
+                        <a href="{% url 'signout' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign Out</a>
                     </div>
                 </details>
             </ul>
@@ -40,7 +40,18 @@
                 <span>Uploaded {{project.created_at | timesince}} ago</span>
                 <h1>{{project.title}}</h1>
                 <h2>{{project.category}}</h2>
-                <h3><img src="{% static 'user.png' %}" alt="user-profile" width="30" height="30">{{project.uploaded_by}}</h3>
+
+                {% if user in project.likes.all %}
+                <h3><a href="{% url 'like' project.id %}" style="color: inherit;">{{project.number_of_likes}} like(s) ❤️</a></h3>
+                {% else %}
+                <h3><a href="{% url 'like' project.id %}" style="color: inherit;">{{project.number_of_likes}} like(s) 🤍</a></h3>
+                {% endif %}
+                
+                    <h3>
+                        <a href="{% url 'profile' project.uploaded_by.id %}">
+                        <img src="{% static 'user.png' %}" alt="user-profile" width="30" height="30">{{project.uploaded_by}}
+                        </a>
+                    </h3>
                 <div class="links">
                     <a href="{{project.github_link}}" target="_blank"><img src="{% static 'github.png' %}" alt="github" width="30" height="30">GitHub</a>
                     <a href="{{project.live_link}}" target="_blank"><img src="{% static 'link.png' %}" alt="link" width="30" height="30">Live Link</a>
