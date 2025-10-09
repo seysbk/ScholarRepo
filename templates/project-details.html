@@ -68,11 +68,62 @@
                 <source src="{{project.demo_video.url}}" type="video/mp4">
             </video>
             <div class="description">
-                <h4>Project Description</h4>
+                <h2>Project Description</h2>
                 <p>{{project.description}}</p>
             </div>
-        </section>
 
+            <form method="POST">
+                <h2>Comments</h2>
+                {% csrf_token %}
+                <div class="comment">
+                    {{ comment_form.content }}
+                    <button type="submit" name="comment_submit"><img src="{% static 'send.png' %}" alt="send comment" width="28" height="28"></button>
+                </div>
+            </form>
+            <hr>
+
+            {% for comment in comments %}
+                <span>
+                    <strong>{{ comment.user.username }}</strong>
+                    <div class="content">{{ comment.content }}</div>
+                    <small>{{ comment.created_at | timesince}} ago</small>
+
+                    <!-- delete comment form -->
+                     {% if comment.user == request.user %}
+                        <form action="{% url 'delete-comment' comment.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="delete" style="margin-bottom: .5rem;">Delete</button>                            
+                        </form>
+                    {% endif %}
+                </span>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="reply">
+                        {{ reply_form.content }}
+                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                        <button type="submit" name="reply_submit">Reply</button>
+                    </div>
+                </form>
+
+                {% for reply in comment.reply_set.all %}
+                    <span style="margin-left: 1rem; display: block; margin-top: 1rem;">
+                        <strong style="margin-left: 20px;">{{ reply.user.username }}</strong>
+                        <div class="content" style="margin-left: 20px;">{{ reply.content }}</div>
+                        <small style="margin-left: 20px;">{{ reply.created_at | timesince}} ago</small>
+
+                        <!-- delete reply form -->
+                     {% if reply.user == request.user %}
+                        <form action="{% url 'delete-reply' reply.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="delete" style="margin-left: 20px;">Delete</button>                           
+                        </form>
+                    {% endif %}
+                    </span>
+                {% endfor %}
+                <hr>
+            {% endfor %}
+        </section>
     </main>
 
     <footer>
@@ -109,10 +160,10 @@
         <div class="footer">
             <ul>
                 <h5>Legal</h5>
-                <a href="#">Terms</a>
-                <a href="#">Privacy</a>
-                <a href="#">Cookies</a>
-                <a href="">Licenses</a>
+                <a href="{% url 'legal' %}#terms">Terms</a>
+                <a href="{% url 'legal' %}#privacy">Privacy</a>
+                <a href="{% url 'legal' %}#licenses">Licenses</a>
+                <!-- <a href="{% url 'legal' %}#terms"></a> -->
             </ul>
         </div>
     </footer>

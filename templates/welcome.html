@@ -81,7 +81,7 @@
                     <h4>{{projects.title}}</h4>
                 </div>
                 <div class="user-project">
-                    <img src="{% static 'user.png'%}" alt="user" width="30px" height="30px">
+                    <img src="{{ projects.uploaded_by.profile_pic.url }}" alt="user" width="30px" height="30px">
                     <h6>{{projects.uploaded_by}}</h6>
                 </div>
             </figcaption>

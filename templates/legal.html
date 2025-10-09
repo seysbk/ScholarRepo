@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'settings.css' %}">
+    <title>ScholarRepo | Legal</title>
+</head>
+<body>
+    <header>
+        <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
+        <nav>
+            <ul>
+                <a href="{% url 'home' %}" class="home"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
+                <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
+                <a href="{% url 'upload' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
+                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <details>
+                    <summary>
+                        <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
+                    </summary>
+                    <div class="account">
+                        <a href="{% url 'profile' %}"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
+                        <a href="{% url 'settings'%}"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'signout' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign Out</a>
+                    </div>
+                </details>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <div class="tabs">
+                <h1>Settings</h1>
+                <h2><a href="{% url 'settings' %}">General</a></h2>
+                <h2><a href="{% url 'project-settings' %}">Project Settings</a></h2>
+                <h2><a href="">Account</a></h2>
+                <h2 class="active"><a href="{% url 'legal' %}">Legal</a></h2>
+            </div>
+            <div class="account-user">
+                <img src="{{user.profile_pic.url}}" alt="user" width="30" height="30" style="border-radius: 50%;">
+                <h2>{{user.username}}</h2>
+            </div>
+        </aside>
+        <section>
+            <div class="settings-header">
+                <h2>Legal</h2>
+                <div class="legal-links">
+                <a href="#terms">Terms of Service</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#license">License Agreement</a>
+                <a href="#disclaimer">Disclaimer</a>
+            </div>
+            </div>
+            
+            <div class="legal">  
+                <h3 id="terms">Terms of Service</h3>
+                <p>
+                    <em>By accessing and using <b>ScholarRepo</b>, you agree to be bound by the following Terms of Service:</em>
+                    <ul style="display: grid; gap: .5rem;">
+                        <li>Users must not use the platform for any illegal activities or to distribute unauthorized or plagiarized content.</li>
+                        <li>ScholarRepo reserves the right to suspend or terminate accounts found violating these terms, with or without prior notice.</li>
+                        <li>All uploaded content remains the intellectual property of its rightful owner, and users are solely responsible for the material they share on the platform.</li>
+                    </ul>                    
+                </p>
+
+                <h3 id="privacy">Privacy Policy</h3>
+                <p>
+                    <em><b>ScholarRepo</b> is committed to protecting your privacy:</em>
+                    <ul style="display: grid; gap: .5rem;">
+                        <li>We collect only the essential information needed to provide our services, such as your name, email address, and project uploads.</li>
+                        <li>None of your personal data will be sold or shared with third-party services without your explicit consent.</li>
+                        <li>All stored data is encrypted and access-controlled to maintain confidentiality.</li>
+                        <li>Users may request data deletion at any time.</li>
+                    </ul>     
+                </p>
+
+                <h3 id="license">License Agreement</h3>
+                <p>
+                    <em> By submitting a project to <b>ScholarRepo</b>,</em>
+                    <ul style="display: grid; gap: .5rem;">
+                        <li>You grant us a non-exclusive, worldwide license to host and display your content within the platform.</li>
+                        <li>You retain full ownership of your work.</li>
+                        <li>This license allows us to showcase your projects to other users, including for promotional or educational purposes.</li>
+                        <li>You must ensure that any content submitted does not infringe on the copyrights or intellectual property rights of others.</li>
+                    </ul>
+                </p>
+
+                <h3 id="disclaimer">Disclaimer</h3>
+                <p>
+                    <b>ScholarRepo</b> provides educational content on an <em> "as-is"</em> basis. While we strive to ensure that all information is <em> accurate and up to date</em>, we make no warranties regarding the completeness or reliability of the content shared by users. <b>ScholarRepo</b> is not liable for any <em> loss, damage, or academic consequences</em> that arise from the use of this platform or its content.
+                </p>
+            </div>
+
+        </section>
+    </main>
+</body>
+</html>

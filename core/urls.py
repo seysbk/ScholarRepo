@@ -15,5 +15,9 @@ urlpatterns = [
     path('signout/', views.signout, name='signout'),
     path('settings/projects/', views.project_settings, name = 'project-settings'),
     path('delete-project/<int:id>/', views.delete_project, name='delete-project'),
-    path('profile/', views.my_profile, name='profile')
+    path('profile/', views.my_profile, name='profile'),
+    path('delete-comment/<int:id>/', views.delete_comment, name='delete-comment'),
+    path('delete-reply/<int:id>/', views.delete_reply, name='delete-reply'),
+    path('settings/', views.settings_general, name = 'settings'),
+    path('settings/legal', views.settings_legal, name = 'legal'),
 ]
