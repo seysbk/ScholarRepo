@@ -18,7 +18,7 @@
                 <a href="{% url 'home' %}" class="home"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px">Home</a>
                 <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
                 <a href="{% url 'upload' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
-                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <a href="{% url 'alerts' %}"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
                 <details>
                     <summary>
                         <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
@@ -87,9 +87,9 @@
         <div class="footer">
             <ul>
                 <h5>Explore</h5>
-                <a href="#">Alerts</a>
-                <a href="#">My Account</a>
-                <a href="#">Find Repo</a>
+                <a href="{% url 'alerts' %}">Alerts</a>
+                <a href="{% url 'profile' %}">My Account</a>
+                <a href="{% url 'find' %}">Find Repo</a>
                 <a href="{% url 'upload' %}">Upload Project</a>
             </ul>
         </div>
@@ -108,10 +108,10 @@
                 <a href="{% url 'legal' %}#terms">Terms</a>
                 <a href="{% url 'legal' %}#privacy">Privacy</a>
                 <a href="{% url 'legal' %}#licenses">Licenses</a>
-                <!-- <a href="{% url 'legal' %}#terms"></a> -->
             </ul>
         </div>
     </footer>
     <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+    <!-- icons from icons8.com -->
 </body>
 </html>

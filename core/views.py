@@ -8,6 +8,10 @@ from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
+
+def custom_404(request,exception):
+    return render(request, '404.html', status=404)
+
 @login_required
 def home(request):
     project_details = Project.objects.all().order_by('-created_at')
@@ -116,9 +120,10 @@ def settings_general(request):
     return render(request, 'settings.html', { 'form': form,'user':user},)
 
 @login_required
-def profile(request,id):
-    project = get_object_or_404(Project, pk=id)
+def profile(request, project_id, user_id):
+    project = get_object_or_404(Project, pk=project_id)
     user = project.uploaded_by
+    user.id=user_id
     projects = Project.objects.filter(uploaded_by=user)
     return render(request, 'profile.html', {'user':user, 'projects':projects},)
 
@@ -171,3 +176,7 @@ def delete_reply(request, id):
 
 def settings_legal(request):
     return render(request, 'legal.html')
+
+@login_required
+def alerts(request):
+    return render(request, 'alerts.html')

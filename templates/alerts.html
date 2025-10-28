@@ -6,19 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpg" href="{% static 'favicon.jpg' %}">
+    <title>ScholarRepo</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <title>ScholarRepo | Upload</title>
-    <link rel="stylesheet" href="{% static 'upload.css' %}">
 </head>
 <body>
     <header>
         <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
         <nav>
             <ul>
-                <a href="{% url 'home' %}" class="nav-img"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px">Home</a>
+                <a href="{% url 'home' %}"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
                 <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
-                <a href="{% url 'upload' %}" class="upload"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px">Upload</a>
-                <a href="{% url 'alerts' %}"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <a href="{% url 'upload' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
+                <a href="{% url 'alerts' %}" class="home"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px">Alerts</a>
                 <details>
                     <summary>
                         <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
@@ -32,60 +32,20 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages%}
-            <li class="{{message.tags}}">{{message}}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h2>Upload New Project</h2>
-
-            <label for="id_category">Project Category</label>
-            {{form.category}}
-
-            <label for="id_title">Project Name</label>
-            {{form.title}}
-
-            <label for="id_description">Description</label>
-            {{form.description}}
-
-            <div class="link">
-                <div class="link-content">
-                    <label for="id_live_link">Live Link</label>
-                    {{form.live_link}}
-                </div>
-                <div class="link-content">
-                    <label for="id_github_link">GitHub Link</label>
-                    {{form.github_link}}
-                </div>            
-            </div>
-
-            <div class="file">
-                <div class="file-content">
-                    <label for="id_cover_image"><img src="{% static 'cloud.png' %}" alt="cloud" width="30" height="30">Cover Image</label>
-                    {{form.cover_image}}
-                </div>
-    
-                <div class="file-content">
-                    <label for="id_demo_video"><img src="{% static 'cloud.png' %}" alt="cloud" width="30" height="30">Demo Video</label>
-                    {{form.demo_video}}
-                </div>
-            </div>
-
-            <button type="submit" class="submit">Submit</submit>
-
-        </form>
+    <section class="alerts-page">
+        <div style="margin: auto;">
+            <h1 style="font-size: 10rem; margin: 0;">🏗️</h1>
+            <h2 style="font-size: 1rem; margin-top: 0;">Alerts Page Coming Soon!</h2>
+            <h3 style="font-size: 1rem; text-align: center;">Check back later</h3>
+        </div>
+    </section>
     </main>
 
     <footer>
         <div class="scholarRepo footer">
-            <a href="#"><img src="{% static 'logo.png' %}" alt="logo" class="nav-img" width="120" height="120"></a>
+            <img src="{% static 'logo.png' %}" alt="logo" class="nav-img" width="120" height="120">
         </div>
         <div class="footer">
             <ul>
@@ -99,9 +59,9 @@
         <div class="footer">
             <ul>
                 <h5>Explore</h5>
-                <a href="{% url 'alerts' %}">Alerts</a>
-                <a href="{% url 'profile' %}">My Account</a>
-                <a href="{% url 'find' %}">Find Repo</a>
+                <a href="#">Alerts</a>
+                <a href="#">My Account</a>
+                <a href="#">Find Repo</a>
                 <a href="{% url 'upload' %}">Upload Project</a>
             </ul>
         </div>
@@ -123,8 +83,7 @@
             </ul>
         </div>
     </footer>
-
-   <p class="right"> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
-   <!-- icons from icons8.com -->
+    <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+    <!-- icons from icons8.com -->
 </body>
 </html>

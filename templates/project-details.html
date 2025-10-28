@@ -18,7 +18,7 @@
                 <a href="{% url 'home' %}" class="home"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
                 <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
                 <a href="{% url 'upload' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
-                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <a href="{% url 'alerts' %}"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
                 <details>
                     <summary>
                         <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
@@ -48,7 +48,7 @@
                 {% endif %}
                 
                     <h3>
-                        <a href="{% url 'profile' project.uploaded_by.id %}">
+                        <a href="{% url 'user-profile' project.id project.uploaded_by.id %}">
                         <img src="{% static 'user.png' %}" alt="user-profile" width="30" height="30">{{project.uploaded_by}}
                         </a>
                     </h3>
@@ -64,7 +64,7 @@
         </section>
 
         <section class="video-description">
-            <video height="600" width="100%" controls>
+            <video height="auto" width="100%" controls>
                 <source src="{{project.demo_video.url}}" type="video/mp4">
             </video>
             <div class="description">
@@ -85,7 +85,7 @@
             {% for comment in comments %}
                 <span>
                     <strong>{{ comment.user.username }}</strong>
-                    <div class="content">{{ comment.content }}</div>
+                    <div class="content" style="line-break: anywhere;">{{ comment.content }}</div>
                     <small>{{ comment.created_at | timesince}} ago</small>
 
                     <!-- delete comment form -->
@@ -109,7 +109,7 @@
                 {% for reply in comment.reply_set.all %}
                     <span style="margin-left: 1rem; display: block; margin-top: 1rem;">
                         <strong style="margin-left: 20px;">{{ reply.user.username }}</strong>
-                        <div class="content" style="margin-left: 20px;">{{ reply.content }}</div>
+                        <div class="content" style="margin-left: 20px; line-break: anywhere;">{{ reply.content }}</div>
                         <small style="margin-left: 20px;">{{ reply.created_at | timesince}} ago</small>
 
                         <!-- delete reply form -->
@@ -142,9 +142,9 @@
         <div class="footer">
             <ul>
                 <h5>Explore</h5>
-                <a href="#">Alerts</a>
-                <a href="#">My Account</a>
-                <a href="#">Find Repo</a>
+                <a href="{% url 'alerts' %}">Alerts</a>
+                <a href="{% url 'profile' %}">My Account</a>
+                <a href="{% url 'find' %}">Find Repo</a>
                 <a href="{% url 'upload' %}">Upload Project</a>
             </ul>
         </div>
@@ -168,5 +168,6 @@
         </div>
     </footer>
     <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+    <!-- icons from icons8.com -->
 </body>
 </html>

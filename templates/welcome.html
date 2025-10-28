@@ -15,17 +15,17 @@
         <img src="{% static 'header.png' %}" alt="ScholarRepo" class="img-header">
         <nav>
             <ul>
-                <a href="#" ><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
-                <a href="#"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
-                <a href="#"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
-                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <a href="{% url 'signin' %}" ><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
+                <a href="{% url 'signin' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
+                <a href="{% url 'signin' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
+                <a href="{% url 'signin' %}"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
                 <details>
                     <summary>
                         <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
                     </summary>
                     <div class="account">
-                        <a href="#"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
-                        <a href="#"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
+                        <a href="{% url 'signin' %}"><img src="{% static 'profile.png' %}" alt="signin" width="25px" height="25px">Profile</a>
+                        <a href="{% url 'signin' %}"><img src="{% static 'settings.png' %}" alt="signin" width="25px" height="25px">Settings</a>
                         <a href="{% url 'signin' %}"><img src="{% static 'signin.png' %}" alt="signin" width="25px" height="25px"> Sign In</a>
                     </div>
                 </details>
@@ -72,6 +72,7 @@
         </div>
         {% for projects in project_details %}
         <article>
+            <a href="{% url 'signin' %}" style="display: inherit; color: var(--black);">
             <figure>
                 <img src="{{ projects.cover_image.url }}" alt="Project cover">
             </figure>
@@ -81,10 +82,11 @@
                     <h4>{{projects.title}}</h4>
                 </div>
                 <div class="user-project">
-                    <img src="{{ projects.uploaded_by.profile_pic.url }}" alt="user" width="30px" height="30px">
+                    <img src="{{ projects.uploaded_by.profile_pic.url }}" alt="user" width="30px" height="30px" style="border-radius: 50%;">
                     <h6>{{projects.uploaded_by}}</h6>
                 </div>
             </figcaption>
+            </a>
         </article>
         {% endfor %}
     </section>
@@ -92,7 +94,7 @@
 
     <footer>
         <div class="scholarRepo footer">
-            <img src="{% static 'logo.png' %}" alt="logo" class="logo" width="120" height="120">
+            <a href="#"><img src="{% static 'logo.png' %}" alt="logo" class="logo" width="120" height="120"></a>
         </div>
         <div class="footer">
             <ul>
@@ -106,10 +108,10 @@
         <div class="footer">
             <ul>
                 <h5>Explore</h5>
-                <a href="#">Alerts</a>
-                <a href="#">My Account</a>
-                <a href="#">Find Repo</a>
-                <a href="{% url 'upload' %}">Upload Project</a>
+                <a href="{% url 'signin' %}">Alerts</a>
+                <a href="{% url 'signin' %}">My Account</a>
+                <a href="{% url 'signin' %}">Find Repo</a>
+                <a href="{% url 'signin' %}">Upload Project</a>
             </ul>
         </div>
         <div class="footer">
@@ -124,13 +126,13 @@
         <div class="footer">
             <ul>
                 <h5>Legal</h5>
-                <a href="#">Terms</a>
-                <a href="#">Privacy</a>
-                <a href="#">Cookies</a>
-                <a href="">Licenses</a>
+                <a href="{% url 'legal' %}#terms">Terms</a>
+                <a href="{% url 'legal' %}#privacy">Privacy</a>
+                <a href="{% url 'legal' %}#licenses">Licenses</a>
             </ul>
         </div>
     </footer>
     <p> &copy; <script> document.write(new Date().getFullYear()) </script> SBKmadeIT | All Rights Reserved</p>
+    <!-- icons from icons8.com -->
 </body>
 </html>

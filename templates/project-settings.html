@@ -18,7 +18,7 @@
                 <a href="{% url 'home' %}" class="home"><img src="{% static 'home.png' %}" alt="home" width="25px" height="25px" class="nav-img">Home</a>
                 <a href="{% url 'find' %}"><img src="{% static 'find.png' %}" alt="find" width="25px" height="25px" class="nav-img">Find</a>
                 <a href="{% url 'upload' %}"><img src="{% static 'upload.png' %}" alt="upload" width="25px" height="25px" class="nav-img">Upload</a>
-                <a href="#"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
+                <a href="{% url 'alerts' %}"><img src="{% static 'notification.png' %}" alt="alerts" width="25px" height="25px" class="nav-img">Alerts</a>
                 <details>
                     <summary>
                         <img src="{% static 'user.png'%}" alt="user" width="25px" height="25px" class="nav-img">Account
@@ -66,14 +66,14 @@
                     <figure>
                         <img src="{{ project.cover_image.url }}" alt="Project cover">
                     </figure>
-                    <figcaption>
+                    <figcaption style="flex-direction: column;">
                         <div class="description">
                             <h3>{{project.category}}</h3>
                             <h4>{{project.title}}</h4>
                         </div>
-                        <div class="user-project">
+                        
                             <button type="submit" class="delete-btn"><a href="{% url 'delete-project' project.id%}" style="color: inherit;">delete project</a></button>
-                        </div>
+                    
                     </figcaption>
                 </article>
             {% endfor %}
@@ -81,5 +81,6 @@
 
         </section>
     </main>
+    <!-- icons from icons8.com -->
 </body>
 </html>
