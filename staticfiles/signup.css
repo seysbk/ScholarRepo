@@ -1,0 +1,150 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Consolas';
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+:root {
+    --yellow: #FFC107;
+    --black: black;
+    --white: white;
+    --shadow: rgba(0, 0, 0, 0.2);
+}
+
+header{
+    margin: 1rem 3rem 0 3rem;
+    background: linear-gradient(90deg, #FFC107, #FFCA28, #FFD54F);
+    padding: 0.5rem 1rem;
+    padding-left: 1rem;
+    position: relative;
+    height: max-content;
+    border-radius: 1rem;
+    display: flex;
+    box-shadow: 0px 0px 45px 0px var(--shadow);
+    box-sizing: border-box;
+}
+
+.img-header {
+    width: 15rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+    padding-top: 1rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+    border-radius: 0 0 1rem 1rem;
+    width: 100%;
+}
+
+fieldset {
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 10px 20px var(--shadow);
+    width: 35%;
+}
+
+label {
+    color: var(--black);
+}
+
+p {
+    text-align:center ;
+    margin-top: 1rem;
+}
+
+input {
+    height: 2.5rem;
+    border-radius: .5rem;
+    border: 1px solid var(--yellow);
+    text-indent: 1rem;
+    margin-bottom: .5rem;
+}
+
+.submit {
+    background: linear-gradient(90deg, #FFC107, #FFCA28, #FFD54F);
+    margin-top: 1rem;
+    font-weight: 900;
+    color: var(--black);
+    cursor: pointer;
+    box-shadow: 0 4px 4px 0 var(--shadow);
+}
+
+.submit:hover {
+    background: var(--yellow);
+}
+
+legend {
+    font-weight: 900;
+    font-size: 1.5rem;
+    background-color: var(--white);
+}
+
+.check {
+    display: flex;
+    align-items: center;
+}
+
+.check > input {
+    accent-color: var(--yellow);
+    margin-right: .5rem;
+    height: 1rem;
+    width: 1rem;
+    cursor: pointer;
+}
+
+.check > a {
+    margin: .5rem;
+}
+
+header > nav {
+    display: flex;
+    position: absolute;
+    top: 1%;
+    right: 1rem;
+    z-index: 1;
+    height: 100%;
+    gap: 0;
+}
+
+nav > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 900;
+    font-size: .7rem;
+    flex-direction: column;
+    row-gap: -1;
+}
+
+@media screen and (width < 50rem) {
+    fieldset {
+    width: 80%;
+}
+    header{
+        width: 95%;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: .5rem;
+        margin: 1rem auto 0 auto;
+    }
+    .img-header{
+    width: 50%;
+   }
+}
