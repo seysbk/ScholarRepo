@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b67ey3@%9e!26(#8w7!$)v$v16i%2t99k57k6=iua8mv&vqv=4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['scholarrepo.onrender.com', 'localhost']
 
