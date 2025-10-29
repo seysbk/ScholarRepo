@@ -1,6 +1,5 @@
 todo.txt
 media/
-static/
 *log
 _pycache_/
 *.py[cod]
