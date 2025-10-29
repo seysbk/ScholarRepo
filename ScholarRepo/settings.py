@@ -57,6 +57,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MIDDLEWARE = [
+       'whitenoise.middleware.WhiteNoiseMiddleware',
+       ...
+   ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 ROOT_URLCONF = 'ScholarRepo.urls'
 
 TEMPLATES = [
