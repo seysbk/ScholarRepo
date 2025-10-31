@@ -17,7 +17,7 @@ class User(AbstractUser):
     instagram = models.TextField(null=True, blank=True)
     link = models.TextField(null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pic/', null=True, blank=True, default='profile_pic/logo.png')
+    profile_pic = models.ImageField(upload_to='profile_pic/', null=True, blank=True, default='logo.png')
     
     def __str__(self):
         return self.username
