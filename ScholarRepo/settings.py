@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-b67ey3@%9e!26(#8w7!$)v$v16i%2t99k57k6=iua8mv&vqv=4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['scholarrepo.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['scholarrepo.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition

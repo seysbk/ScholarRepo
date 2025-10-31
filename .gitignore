@@ -6,3 +6,4 @@ _pycache_/
 environment/
 db.sqlite3
 .vscode
+.env
