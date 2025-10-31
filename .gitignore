@@ -7,3 +7,4 @@ environment/
 db.sqlite3
 .vscode
 .env
+staticfiles/
