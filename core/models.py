@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Role(models.Model):
     name = models.CharField ('User Role', max_length=8)
-    permisions = models.CharField()
+    permisions = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -29,7 +29,7 @@ class Category(models.Model):
         return self.name
 
 class Project(models.Model):
-    title = models.CharField()
+    title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     cover_image = models.ImageField(upload_to='project_images/')
