@@ -44,9 +44,12 @@
 
                 <label for="id_password1">Create Password</label>
                 {{form.password1}}
+                
 
                 <label for="id_password2">Confirm Password</label>
                 {{form.password2}}
+                <span style="color: red; font-size: smaller; padding: 1rem;">password must be eight (8) characters</span>
+
 
                 <label for="check" class="check"><input type="checkbox" required name="check"><div>I agree to <a href="{% url 'legal' %}#terms"> Terms </a> of service</div></label>
 
